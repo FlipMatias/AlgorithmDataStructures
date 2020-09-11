@@ -13,11 +13,11 @@ static auto sum(T n, T min = 0)
 }
 
 
-int main()
+/*int main()
 {
     for (long i = 0; i <= 100; ++i)
         printf("%ld => %ld\n", i, sum(i));
 
     printf("\n\n");
     return 0;
-}
+}*/

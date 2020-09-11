@@ -29,7 +29,7 @@ static uint64_t cfactorial()
 }
 
 
-int main()
+/*int main()
 {
     for (long i=0; i <= 10; ++i)
         printf("%ld => %ld\n", i, factorial(i));
@@ -41,4 +41,4 @@ int main()
 
     printf("\n\n");
     return 0;
-}
+}*/

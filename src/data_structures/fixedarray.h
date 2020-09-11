@@ -3,8 +3,8 @@
 #include <algorithm>
 #include <type_traits>
 
-#include "search.h"
-#include "util.h"
+#include "../algorithms/search.h"
+#include "../algorithms/util.h"
 
 
 namespace ads
@@ -18,7 +18,7 @@ namespace ads
 
 
     public:
-        FixedArray() : _length{0}, _min{nullptr}, _max{nullptr}
+        FixedArray() : _length{0}
         {
             if constexpr (std::is_integral<Type>())
                 std::fill(_data, _data + Size, 0);
@@ -125,5 +125,3 @@ namespace ads
         }
     };
 }
-
-

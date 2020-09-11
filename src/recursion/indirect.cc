@@ -22,10 +22,10 @@ static void printB(int n)
 }
 
 
-int main()
+/*int main()
 {
     printA(5);
 
     printf("\n\n");
     return 0;
-}
+}*/

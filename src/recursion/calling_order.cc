@@ -11,9 +11,9 @@ static void fun(int n)
 }
 
 
-int main()
+/*int main()
 {
     fun(5);
 
     return 0;
-}
+}*/

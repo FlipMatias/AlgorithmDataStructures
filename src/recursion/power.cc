@@ -14,11 +14,11 @@ static int power(int num, int exp)
 }
 
 
-int main()
+/*int main()
 {
     for (int i=1; i <= 10; ++i)
         printf("%d^%d => %d\n", i, 2, power(i, 2));
 
     printf("\n\n");
     return 0;
-}
+}*/

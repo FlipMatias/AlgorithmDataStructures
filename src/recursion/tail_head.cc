@@ -28,7 +28,7 @@ static void inverse(const vector<string>& consoles, size_t index = 0)
 
 
 
-int main()
+/*int main()
 {
     //tests
     printf("%ld\n\n", summation(5));
@@ -37,4 +37,4 @@ int main()
     inverse(consoles);
 
     return 0;
-}
+}*/

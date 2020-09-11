@@ -12,11 +12,11 @@ static int count(int n)
 }
 
 
-int main()
+/*int main()
 {
     int res = count(200);
     printf("%d ", res);
 
     printf("\n\n");
     return 0;
-}
+}*/

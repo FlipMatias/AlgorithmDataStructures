@@ -4,7 +4,7 @@
 #include <type_traits>
 #include <cassert>
 
-#include "search.h"
+#include "../algorithms/search.h"
 
 
 namespace ads
@@ -15,8 +15,6 @@ namespace ads
     private:
         static constexpr size_t Default_Cap { 128 };
         Type* _data;
-        Type* _min;
-        Type* _max;
         size_t _length;
         size_t _capacity;
 
@@ -127,8 +125,8 @@ namespace ads
         }
 
 
-        auto begin() -> Type {
-            return alg::
+        auto begin() -> Type* {
+            return _data;
         }
 
 
@@ -143,8 +141,6 @@ namespace ads
             _capacity = Default_Cap;
             _length = 0;
             _data = new Type[_capacity];
-            _min = nullptr;
-            _max = nullptr;
         }
 
 

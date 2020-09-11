@@ -12,10 +12,10 @@ static void treeFunction(int n)
 }
 
 
-int main()
+/*int main()
 {
     treeFunction(3);
 
     printf("\n\n");
     return 0;
-}
+}*/

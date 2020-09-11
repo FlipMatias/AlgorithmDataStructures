@@ -8,7 +8,7 @@ static void ascendingPrint(unsigned int n)
         return;
     } else {
         printf("%d ", n);
-        ascendingPrint1(n - 1);
+        ascendingPrint(n - 1);
     }
 }
 
@@ -25,11 +25,11 @@ static void descendingPrint(unsigned int n)
 }
 
 
-int main()
+/*int main()
 {
     ascendingPrint(5);
     printf("\n");
     descendingPrint((5);
 
     return 0;
-}
+}*/
