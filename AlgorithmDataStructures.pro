@@ -17,6 +17,7 @@ SOURCES += src/main.cc \
     src/recursion/tree_recursion.cc
 
 HEADERS += \
+    src/algorithms/binary_search.h \
     src/algorithms/search.h \
     src/algorithms/util.h \
     src/data_structures/array.h \
