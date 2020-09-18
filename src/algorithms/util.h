@@ -1,9 +1,33 @@
 #pragma once
 
+#include <iostream>
 #include <iterator>
+
 
 namespace alg
 {
+    template <typename T>
+    auto length(T&& items) -> size_t {
+        return std::end(items) - std::begin(items);
+    }
+
+
+    template <typename T>
+    auto isEmpty(T&& items) -> bool {
+        return !length(items);
+    }
+
+
+    template <class T>
+    void print(T&& items)
+    {
+        std::cout << "[ ";
+        for (const auto& i : items)
+            std::cout << i << " ";
+        std::cout << "]\n";
+    }
+
+
     template <int Ret = 0, typename Type>
     auto swap(Type& a, Type& b)
     {
