@@ -21,6 +21,15 @@ namespace alg
 
 
     template <typename T>
+    void swap_iterators(T beg, T end)
+    {
+        auto temp = *beg;
+        *beg = *end;
+        *end = temp;
+    }
+
+
+    template <typename T>
     auto min(T&& a,T&& b) -> T {
         return (a <= b) ? a : b;
     }
