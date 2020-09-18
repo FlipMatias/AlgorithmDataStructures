@@ -18,7 +18,10 @@ SOURCES += src/main.cc \
 
 HEADERS += \
     src/algorithms/binary_search.h \
+    src/algorithms/numbers_util.h \
+    src/algorithms/reserve_rotate_shift.h \
     src/algorithms/search.h \
+    src/algorithms/sorting.h \
     src/algorithms/util.h \
     src/data_structures/array.h \
     src/data_structures/fixedarray.h

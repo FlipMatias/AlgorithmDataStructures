@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <type_traits>
+#include <initializer_list>
 #include <cassert>
 
 #include "../algorithms/search.h"
@@ -22,6 +23,15 @@ namespace ads
         Array()
         {
             this->init();
+        }
+
+
+        Array(const std::initializer_list<Type>& list)
+        {
+            this->init();
+
+            for (const auto& item : list)
+                this->append(item);
         }
 
 
@@ -93,6 +103,15 @@ namespace ads
         }
 
 
+        auto operator += (const Array& arr) -> Array&
+        {
+            auto* tarr = const_cast<Array<Type>*>(&arr);
+            for (const auto& item : *tarr)
+                this->append(item);
+            return *this;
+        }
+
+
         auto operator [](size_t index) -> Type& {
             return _data[index];
         }
@@ -131,6 +150,16 @@ namespace ads
 
 
         auto end() -> Type* {
+            return (_data + _length);
+        }
+
+
+        auto cbegin() const -> const Type* {
+            return _data;
+        }
+
+
+        auto cend() const -> const Type* {
             return (_data + _length);
         }
 
