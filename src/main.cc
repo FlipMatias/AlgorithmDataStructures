@@ -15,7 +15,8 @@ int main()
 {
     ads::Array<int> arr { 1, 2, 3, 4, 5 };
     arr += ads::Array<int>({6, 7 ,8});
-    alg::print(arr);
+    auto arr2 = arr;
+    alg::print(arr2);
 
     printf("\n\n");
     return 0;

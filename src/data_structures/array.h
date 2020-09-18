@@ -35,6 +35,33 @@ namespace ads
         }
 
 
+        Array(Array&& arr)
+        {
+            delete[] this->_data;
+            this->_data = arr._data;
+            this->_length = arr.length();
+            this->_capacity = arr.capacity();
+            arr.init();
+        }
+
+
+        Array(const Array& arr)
+        {
+            this->init();
+            *this = arr;
+        }
+
+
+        auto operator = (const Array& arr) -> Array&
+        {
+            auto* carr = const_cast<Array<Type>*>(&arr);
+            for (const auto& item : *carr) {
+                this->append(item);
+            }
+            return *this;
+        }
+
+
         template <class... Args>
         Array(const size_t num, Args&&... args)
         {
@@ -100,6 +127,15 @@ namespace ads
                 _data[i] = _data[i + 1];
 
             _length -= 1;
+        }
+
+
+        void clear()
+        {
+            _length = 0;
+            _capacity = Default_Cap;
+            delete[] _data;
+            _data = new Type[_capacity];
         }
 
 
