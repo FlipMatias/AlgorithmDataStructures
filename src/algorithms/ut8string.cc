@@ -44,4 +44,39 @@ namespace alg::utf8
     {
         return alg::utf8::length(str.data());
     }
+
+
+    auto isDigit(uint32_t ch) -> bool
+    {
+        uint8_t byte = ch & 0xff;
+        return (byte >= 0x30 && byte <= 0x39);
+    }
+
+
+    auto size(const char* str) -> size_t
+    {
+        assert(str != nullptr);
+
+        size_t size = 0;
+        uint8_t* c = (uint8_t*)str;
+        for (; *c != 0x0; ++c) {
+            ++size; }
+
+        return size;
+    }
+
+
+    auto compare(const char* str1, const char* str2) -> bool
+    {
+        assert(str1 != nullptr);
+        assert(str2 != nullptr);
+
+        size_t s1 = size(str1);
+        size_t s2 = size(str2);
+
+        if (s1 != s2) return false;
+        if (memcmp(str1, str2, s1+1) != 0) return false;
+
+        return true;
+    }
 }
