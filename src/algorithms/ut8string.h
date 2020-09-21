@@ -12,4 +12,6 @@ namespace alg::utf8
 
     size_t size(const char* str);
     bool compare(const char* str1, const char* str2);
+
+    auto kmp(std::string_view text, std::string_view pattern) -> std::vector<size_t>;
 }

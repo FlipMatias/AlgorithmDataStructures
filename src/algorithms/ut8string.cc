@@ -79,4 +79,37 @@ namespace alg::utf8
 
         return true;
     }
+
+
+    auto kmp(std::string_view text, std::string_view pattern) -> std::vector<size_t>
+    {
+        std::vector<size_t> next { 0 };
+        std::size_t j = 0;
+
+        for (size_t i = 1; i < pattern.length(); ++i)
+        {
+            while (j > 0 && pattern[j] != pattern[i]) { j = next[j - 1]; }
+
+            if (pattern[j] == pattern[i]) { j += 1; }
+
+            next.push_back(j);
+        }
+
+        std::vector<size_t> ans;
+        j = 0;
+
+        for (size_t i = 0; i < text.length(); ++i)
+        {
+            while (j > 0 && text[i] != pattern[j]) { j = next[j - 1]; }
+
+            if (text[i] == pattern[j]) { j += 1; }
+
+            if (j == pattern.length()) {
+                ans.push_back(i - (j - 1));
+                j = next[j - 1];
+            }
+        }
+
+        return ans;
+    }
 }
