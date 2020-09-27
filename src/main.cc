@@ -11,9 +11,9 @@ int main()
 {
     ads::LinkedList<string> names ({"C++", "C", "Java", "Javascript", "Python"});
 
-    for (const auto& s : names) {
+    names.traverse([](const string& s) {
         cout << s << "\n";
-    }
+    });
 
     printf("\n\n");
     return 0;

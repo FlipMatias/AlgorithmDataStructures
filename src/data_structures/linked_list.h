@@ -140,6 +140,23 @@ namespace ads
         }
 
 
+        auto size() const -> size_t {
+            return _size;
+        }
+
+
+        bool isEmpty() const {
+            return (_size == 0);
+        }
+
+        template <typename Func>
+        void traverse(Func func) {
+            for (const auto& item : *this) {
+                func(item);
+            }
+        }
+
+
         auto begin() {
             return LinkedListIterator<Type>(_firstNode);
         }
