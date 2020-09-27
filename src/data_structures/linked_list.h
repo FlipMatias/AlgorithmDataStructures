@@ -71,13 +71,29 @@ namespace ads
         }
 
 
-        void display()
+        void display(bool reverse = false)
         {
             auto node = _firstNode;
 
-            while (node != nullptr) {
+            if (!reverse) {
+                while (node != nullptr) {
+                    std::cout << node->data << "\n";
+                    node = node->next;
+                }
+
+                return;
+            }
+
+            displayReverse(node);
+        }
+
+
+    private:
+        void displayReverse(LinkedListNode<Type>* node)
+        {
+            if (node != nullptr) {
+                displayReverse(node->next);
                 std::cout << node->data << "\n";
-                node = node->next;
             }
         }
     };
