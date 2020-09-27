@@ -6,6 +6,58 @@
 namespace ads
 {
     template <typename Type>
+    class LinkedList;
+
+    template <typename Type>
+    struct LinkedListNode;
+}
+
+
+namespace ads
+{
+    template <typename Type>
+    class LinkedListIterator
+    {
+    private:
+        LinkedListNode<Type>* _node { nullptr };
+
+    public:
+        LinkedListIterator(LinkedListNode<Type>* node) : _node{node}
+        {
+        }
+
+
+        auto operator * () -> Type& {
+            return _node->data;
+        }
+
+
+        auto operator -> () -> LinkedListNode<Type>* {
+            return _node;
+        }
+
+
+        bool operator != (const LinkedListIterator& other) const {
+            return _node != other._node;
+        }
+
+
+        bool operator == (const LinkedListIterator& other) const {
+            return _node == other._node;
+        }
+
+
+        auto operator ++ () -> LinkedListIterator {
+             this->_node = _node->next;
+             return *this;
+        }
+    };
+}
+
+
+namespace ads
+{
+    template <typename Type>
     struct LinkedListNode
     {
         Type data;
@@ -85,6 +137,16 @@ namespace ads
             }
 
             displayReverse(node);
+        }
+
+
+        auto begin() {
+            return LinkedListIterator<Type>(_firstNode);
+        }
+
+
+        auto end() {
+            return LinkedListIterator<Type>(_lastNode->next);
         }
 
 

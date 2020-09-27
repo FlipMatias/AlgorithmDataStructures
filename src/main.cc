@@ -1,22 +1,19 @@
 #include <iostream>
 #include <string>
-#include <vector>
-#include <memory>
-#include <list>
-#include <map>
 using namespace std;
 
 #include "algorithms/util.h"
 #include "data_structures/array.h"
-
+#include "data_structures/linked_list.h"
 
 
 int main()
 {
-    ads::Array<int> arr { 1, 2, 3, 4, 5 };
-    arr += ads::Array<int>({6, 7 ,8});
-    auto arr2 = arr;
-    alg::print(arr2);
+    ads::LinkedList<string> names ({"C++", "C", "Java", "Javascript", "Python"});
+
+    for (const auto& s : names) {
+        cout << s << "\n";
+    }
 
     printf("\n\n");
     return 0;
