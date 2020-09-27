@@ -9,7 +9,18 @@ using namespace std;
 
 int main()
 {
-    ads::LinkedList<string> names ({"C++", "C", "Java", "Javascript", "Python"});
+    ads::LinkedList<string> names;
+
+    names.prepend("Brainfuck");
+    names.prepend("Bongosort");
+    names.prepend("Brainfuck");
+    names.prepend("Bongosort");
+    names.prepend("Brainfuck");
+    names.prepend("Bongosort");
+    names.prepend("Brainfuck");
+    names.prepend("Bongosort");
+    names.prepend("Brainfuck");
+    names.prepend("Bongosort");
 
     names.traverse([](const string& s) {
         cout << s << "\n";

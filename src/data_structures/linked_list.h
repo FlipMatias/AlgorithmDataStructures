@@ -123,6 +123,47 @@ namespace ads
         }
 
 
+        template <typename... Args>
+        void append(Args&&... args)
+        {
+            auto node = new LinkedListNode<Type>(args...);
+
+            if (_firstNode == nullptr)
+            {
+                _firstNode = node;
+                _firstNode->next = nullptr;
+                _lastNode = _firstNode;
+                _size += 1;
+                return;
+            }
+
+            _lastNode->next = node;
+            _lastNode = _lastNode->next;
+            _lastNode->next = nullptr;
+            _size += 1;
+        }
+
+
+        template <typename... Args>
+        void prepend(Args&&... args)
+        {
+            auto node = new LinkedListNode<Type>(args...);
+
+            if (_firstNode == nullptr)
+            {
+                _firstNode = node;
+                _firstNode->next = nullptr;
+                _lastNode = _firstNode;
+                _size += 1;
+                return;
+            }
+
+            node->next = _firstNode;
+            _firstNode = node;
+            _size += 1;
+        }
+
+
         void display(bool reverse = false)
         {
             auto node = _firstNode;
