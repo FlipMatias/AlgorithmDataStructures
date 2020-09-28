@@ -11,20 +11,17 @@ int main()
 {
     ads::LinkedList<string> names;
 
-    names.prepend("Brainfuck");
-    names.prepend("Bongosort");
-    names.prepend("Brainfuck");
-    names.prepend("Bongosort");
-    names.prepend("Brainfuck");
-    names.prepend("Bongosort");
-    names.prepend("Brainfuck");
-    names.prepend("Bongosort");
-    names.prepend("Brainfuck");
-    names.prepend("Bongosort");
+    names.prepend("C++");
+    names.prepend("Java");
+    names.prepend("C#");
+    names.prepend("Python");
+    names.prepend("C");
+    names.prepend("Javascript");
 
-    names.traverse([](const string& s) {
-        cout << s << "\n";
-    });
+    while (!names.isEmpty())
+    {
+        cout << names.popFront() << "\n";
+    }
 
     printf("\n\n");
     return 0;

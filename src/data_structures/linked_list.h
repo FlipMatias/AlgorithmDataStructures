@@ -61,10 +61,18 @@ namespace ads
     struct LinkedListNode
     {
         Type data;
-        LinkedListNode<Type>* next;
+        LinkedListNode<Type>* next { nullptr };
+        LinkedListNode<Type>* prev { nullptr };
+
+        LinkedListNode(const Type& data) : data{data}
+        {
+        }
 
         template <typename... Args>
-        LinkedListNode(Args&&... args) : data(args...)
+        LinkedListNode(const Type& data,
+                       LinkedListNode<Type>* next = nullptr,
+                       LinkedListNode<Type>* prev = nullptr)
+            : data{data}, next{next}, prev{prev}
         {
         }
     };
@@ -77,43 +85,25 @@ namespace ads
     class LinkedList
     {
     private:
-        LinkedListNode<Type>* _firstNode;
-        LinkedListNode<Type>* _lastNode;
+        LinkedListNode<Type>* _tail;
+        LinkedListNode<Type>* _head;
         size_t _size;
 
     public:
-        LinkedList() : _size(0), _firstNode(nullptr), _lastNode(nullptr)
+        LinkedList() : _size(0), _tail(nullptr), _head(nullptr)
         {
         }
 
 
         LinkedList(const std::initializer_list<Type>& list)
         {
-            if (list.size() == 0) {
-                return;
-            }
 
-            auto i = list.begin();
-
-            _firstNode = new LinkedListNode<Type>(*i);
-            _firstNode->next = nullptr;
-            _lastNode = _firstNode;
-            ++i;
-
-            for (; i != list.end(); ++i) {
-                auto node = new LinkedListNode<Type>(*i);
-                node->next = nullptr;
-                _lastNode->next = node;
-                _lastNode = node;
-            }
-
-            _size = list.size();
         }
 
 
         ~LinkedList()
         {
-            auto node = _firstNode;
+            auto node = _tail;
 
             while (node != nullptr) {
                 auto temp = node;
@@ -126,47 +116,54 @@ namespace ads
         template <typename... Args>
         void append(Args&&... args)
         {
-            auto node = new LinkedListNode<Type>(args...);
 
-            if (_firstNode == nullptr)
-            {
-                _firstNode = node;
-                _firstNode->next = nullptr;
-                _lastNode = _firstNode;
-                _size += 1;
-                return;
-            }
-
-            _lastNode->next = node;
-            _lastNode = _lastNode->next;
-            _lastNode->next = nullptr;
-            _size += 1;
         }
 
 
         template <typename... Args>
         void prepend(Args&&... args)
         {
-            auto node = new LinkedListNode<Type>(args...);
-
-            if (_firstNode == nullptr)
-            {
-                _firstNode = node;
-                _firstNode->next = nullptr;
-                _lastNode = _firstNode;
-                _size += 1;
-                return;
+            if (_tail != nullptr){
+                _tail = new LinkedListNode<Type>(args..., nullptr, _tail);
+                _tail->prev->next = _tail;
+            } else {
+                _head = _tail = new LinkedListNode<Type>(args...);
             }
 
-            node->next = _firstNode;
-            _firstNode = node;
             _size += 1;
+        }
+
+
+        auto popFront() -> Type
+        {
+            auto data = _tail->data;
+
+            if (_tail == _head)
+            {
+                delete _head;
+                _tail = _head = nullptr;
+            }
+            else
+            {
+                _tail = _tail->prev;
+                delete _tail->next;
+                _tail->next = nullptr;
+            }
+
+            _size -= 1;
+            return data;
+        }
+
+
+        auto popBack() -> Type
+        {
+            return Type();
         }
 
 
         void display(bool reverse = false)
         {
-            auto node = _firstNode;
+            auto node = _tail;
 
             if (!reverse) {
                 while (node != nullptr) {
@@ -199,12 +196,12 @@ namespace ads
 
 
         auto begin() {
-            return LinkedListIterator<Type>(_firstNode);
+            return LinkedListIterator<Type>(_tail);
         }
 
 
         auto end() {
-            return LinkedListIterator<Type>(_lastNode->next);
+            return LinkedListIterator<Type>(_head->next);
         }
 
 
