@@ -11,16 +11,16 @@ int main()
 {
     ads::LinkedList<string> names;
 
-    names.prepend("C++");
-    names.prepend("Java");
-    names.prepend("C#");
-    names.prepend("Python");
-    names.prepend("C");
-    names.prepend("Javascript");
+    names.append("C++");
+    names.append("Java");
+    names.append("C#");
+    names.append("Python");
+    names.append("C");
+    names.append("Javascript");
 
     while (!names.isEmpty())
     {
-        cout << names.popFront() << "\n";
+        cout << names.popBack() << "\n";
     }
 
     printf("\n\n");

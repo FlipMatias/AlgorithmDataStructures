@@ -68,7 +68,6 @@ namespace ads
         {
         }
 
-        template <typename... Args>
         LinkedListNode(const Type& data,
                        LinkedListNode<Type>* next = nullptr,
                        LinkedListNode<Type>* prev = nullptr)
@@ -116,7 +115,14 @@ namespace ads
         template <typename... Args>
         void append(Args&&... args)
         {
+            if (_head != nullptr){
+                _head = new LinkedListNode<Type>(args..., nullptr, _head);
+                _head->prev->next = _head;
+            } else {
+                _head = _tail = new LinkedListNode<Type>(args..., nullptr, nullptr);
+            }
 
+            _size += 1;
         }
 
 
@@ -157,7 +163,22 @@ namespace ads
 
         auto popBack() -> Type
         {
-            return Type();
+            auto data = _head->data;
+
+            if (_tail == _head)
+            {
+                delete _head;
+                _tail = _head = nullptr;
+            }
+            else
+            {
+                _head = _head->prev;
+                delete _head->next;
+                _head->next = nullptr;
+            }
+
+            _size -= 1;
+            return data;
         }
 
 
