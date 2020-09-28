@@ -6,9 +6,6 @@
 namespace ads
 {
     template <typename Type>
-    class LinkedList;
-
-    template <typename Type>
     struct LinkedListNode;
 }
 
@@ -84,25 +81,55 @@ namespace ads
     class LinkedList
     {
     private:
-        LinkedListNode<Type>* _tail;
-        LinkedListNode<Type>* _head;
-        size_t _size;
+        LinkedListNode<Type>* _head { nullptr };
+        LinkedListNode<Type>* _tail { nullptr };
+        size_t _size { 0 };
 
     public:
-        LinkedList() : _size(0), _tail(nullptr), _head(nullptr)
+        LinkedList()
         {
         }
 
 
         LinkedList(const std::initializer_list<Type>& list)
         {
+            for (const auto& item : list) {
+                this->append(item);
+            }
+        }
 
+
+        LinkedList(const LinkedList& other)
+        {
+            *this = other;
+        }
+
+
+        auto operator = (const LinkedList& other) -> LinkedList&
+        {
+            auto otherPtr = (LinkedList<Type>*)&other;
+            for (const auto& item : *otherPtr)
+                this->append(item);
+            return *this;
+        }
+
+
+        LinkedList(LinkedList&& other)
+        {
+            this->~LinkedList();
+            this->_size = other._size;
+            this->_tail = other._tail;
+            this->_head = other._head;
+
+            other._size = 9;
+            other._head = nullptr;
+            other._tail = nullptr;
         }
 
 
         ~LinkedList()
         {
-            auto node = _tail;
+            auto node = _head;
 
             while (node != nullptr) {
                 auto temp = node;
@@ -115,11 +142,11 @@ namespace ads
         template <typename... Args>
         void append(Args&&... args)
         {
-            if (_head != nullptr){
-                _head = new LinkedListNode<Type>(args..., nullptr, _head);
-                _head->prev->next = _head;
+            if (_tail != nullptr){
+                _tail = new LinkedListNode<Type>(args..., nullptr, _tail);
+                _tail->prev->next = _tail;
             } else {
-                _head = _tail = new LinkedListNode<Type>(args..., nullptr, nullptr);
+                _tail = _head = new LinkedListNode<Type>(args..., nullptr, nullptr);
             }
 
             _size += 1;
@@ -129,11 +156,11 @@ namespace ads
         template <typename... Args>
         void prepend(Args&&... args)
         {
-            if (_tail != nullptr){
-                _tail = new LinkedListNode<Type>(args..., nullptr, _tail);
-                _tail->prev->next = _tail;
+            if (_head != nullptr){
+                _head = new LinkedListNode<Type>(args..., nullptr, _head);
+                _head->prev->next = _head;
             } else {
-                _head = _tail = new LinkedListNode<Type>(args...);
+                _tail = _head = new LinkedListNode<Type>(args...);
             }
 
             _size += 1;
@@ -142,33 +169,12 @@ namespace ads
 
         auto popFront() -> Type
         {
-            auto data = _tail->data;
-
-            if (_tail == _head)
-            {
-                delete _head;
-                _tail = _head = nullptr;
-            }
-            else
-            {
-                _tail = _tail->prev;
-                delete _tail->next;
-                _tail->next = nullptr;
-            }
-
-            _size -= 1;
-            return data;
-        }
-
-
-        auto popBack() -> Type
-        {
             auto data = _head->data;
 
-            if (_tail == _head)
+            if (_head == _tail)
             {
-                delete _head;
-                _tail = _head = nullptr;
+                delete _tail;
+                _head = _tail = nullptr;
             }
             else
             {
@@ -182,9 +188,30 @@ namespace ads
         }
 
 
+        auto popBack() -> Type
+        {
+            auto data = _tail->data;
+
+            if (_head == _tail)
+            {
+                delete _tail;
+                _head = _tail = nullptr;
+            }
+            else
+            {
+                _tail = _tail->prev;
+                delete _tail->next;
+                _tail->next = nullptr;
+            }
+
+            _size -= 1;
+            return data;
+        }
+
+
         void display(bool reverse = false)
         {
-            auto node = _tail;
+            auto node = _head;
 
             if (!reverse) {
                 while (node != nullptr) {
@@ -217,12 +244,12 @@ namespace ads
 
 
         auto begin() {
-            return LinkedListIterator<Type>(_tail);
+            return LinkedListIterator<Type>(_head);
         }
 
 
         auto end() {
-            return LinkedListIterator<Type>(_head->next);
+            return LinkedListIterator<Type>(_tail->next);
         }
 
 

@@ -7,21 +7,19 @@ using namespace std;
 #include "data_structures/linked_list.h"
 
 
+
 int main()
 {
-    ads::LinkedList<string> names;
+    ads::LinkedList<string> desserts;
+    desserts.append("Chocolate Ice Cream");
+    desserts.append("Brigadeiro");
+    desserts.append("Tiramisu");
+    desserts.append("Doce de leite");
 
-    names.append("C++");
-    names.append("Java");
-    names.append("C#");
-    names.append("Python");
-    names.append("C");
-    names.append("Javascript");
+    auto d = std::move(desserts);
+    d.display();
 
-    while (!names.isEmpty())
-    {
-        cout << names.popBack() << "\n";
-    }
+    desserts.display();
 
     printf("\n\n");
     return 0;
