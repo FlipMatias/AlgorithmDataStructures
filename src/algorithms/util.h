@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <iterator>
+#include <cassert>
 
 
 namespace alg
