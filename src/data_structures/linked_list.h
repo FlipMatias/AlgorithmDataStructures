@@ -48,6 +48,11 @@ namespace ads
              this->_node = _node->next;
              return *this;
         }
+
+
+        operator bool() {
+            return (_node == nullptr);
+        }
     };
 }
 
@@ -178,9 +183,9 @@ namespace ads
             }
             else
             {
-                _head = _head->prev;
-                delete _head->next;
-                _head->next = nullptr;
+                auto temp = _head->next;
+                delete _head;
+                _head = temp;
             }
 
             _size -= 1;
@@ -206,6 +211,21 @@ namespace ads
 
             _size -= 1;
             return data;
+        }
+
+
+        void clear()
+        {
+            _size = 0;
+
+            auto node = _head;
+            while (node != nullptr) {
+                auto temp = node;
+                node = node->next;
+                delete temp;
+            }
+
+            _head = _tail = nullptr;
         }
 
 

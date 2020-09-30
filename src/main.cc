@@ -6,20 +6,20 @@ using namespace std;
 #include "data_structures/array.h"
 #include "data_structures/linked_list.h"
 #include "data_structures/stack.h"
+#include "data_structures/queue.h"
 
 
 int main()
 {
-    ads::Stack<string> juices;
-    juices.push("Apple");
-    juices.push("Orange");
-    juices.push("Pineapple");
-    juices.push("Lemon");
-    juices.push("Mango");
+    ads::Queue<string> juices;
+    juices.enqueue("Apple");
+    juices.enqueue("Orange");
+    juices.enqueue("Pineapple");
+    juices.enqueue("Lemon");
+    juices.enqueue("Mango");
 
     while (!juices.isEmpty()) {
-        auto n = juices.pop();
-        cout << n.value() << "\n";
+        cout << juices.dequeue() << "\n";
     }
 
     printf("\n\n");
