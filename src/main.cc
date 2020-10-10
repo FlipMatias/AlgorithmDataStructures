@@ -1,42 +1,26 @@
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 #include "algorithms/util.h"
-#include "data_structures/array.h"
-#include "data_structures/linked_list.h"
-#include "data_structures/stack.h"
-#include "data_structures/queue.h"
+#include "data_structures/fixed_stack.h"
 
 
 int main()
 {
-    ads::Queue<string> juices;
-    juices.enqueue("Apple");
-    juices.enqueue("Orange");
-    juices.enqueue("Pineapple");
-    juices.enqueue("Lemon");
-    juices.enqueue("Mango");
+    ads::FixedStack<int> st;
 
-    while (!juices.isEmpty()) {
-        cout << juices.dequeue() << "\n";
-    }
+    for (int i = 0; i < 10; ++i)
+        st.push(i);
+
+    printf("Peak: %d\n\n", st.peak());
+
+    while (!st.isEmpty())
+        printf("%d\n", st.pop());
+
+    //printf("Peak: %d\n\n", st.peak());
 
     printf("\n\n");
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
