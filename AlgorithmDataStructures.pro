@@ -24,10 +24,14 @@ HEADERS += \
     src/algorithms/numbers_util.h \
     src/algorithms/reserve_rotate_shift.h \
     src/algorithms/search.h \
+    src/algorithms/slow_sorting.h \
     src/algorithms/sorting.h \
     src/algorithms/ut8string.h \
     src/algorithms/util.h \
     src/data_structures/array.h \
+    src/data_structures/fixed_stack.h \
     src/data_structures/fixedarray.h \
     src/data_structures/linked_list.h \
+    src/data_structures/queue.h \
+    src/data_structures/stack.h \
     src/data_structures/string.h

@@ -4,22 +4,17 @@
 using namespace std;
 
 #include "algorithms/util.h"
-#include "data_structures/fixed_stack.h"
+#include "algorithms/slow_sorting.h"
+#include "data_structures/array.h"
 
 
 int main()
 {
-    ads::FixedStack<int> st;
+    ads::Array<string> n { "fu", "fo", "fi", "fe", "fa"};
+    alg::selectionSort(n);
 
-    for (int i = 0; i < 10; ++i)
-        st.push(i);
-
-    printf("Peak: %d\n\n", st.peak());
-
-    while (!st.isEmpty())
-        printf("%d\n", st.pop());
-
-    //printf("Peak: %d\n\n", st.peak());
+    for (string i: n)
+        cout << i << " ";
 
     printf("\n\n");
     return 0;
